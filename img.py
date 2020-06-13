@@ -17,7 +17,7 @@ prefix = "" #prefix for output filename
 suffix = "" #suffix for output filename
 
 quality = 70 # 0-100 quality for jpg
-cores = 2    # Number of streams :)
+cores = 5    # Number of streams :)
 
 
 # For multicore only
