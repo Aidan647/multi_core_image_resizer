@@ -30,7 +30,7 @@ def get_pos(size, to):
 		newS = round((size[0]/size[1]) * to)
 	return (newS, newP)
 
-def start(worker, size, quality, folder, temp, preffix, suffix):
+def start(worker, size, quality, folder, temp, preffix, suffix, upscale, downscale, copy_ud):
 	curr = ""
 	d = open(f"{temp}/core{worker}.log", "w")
 	d.close()
@@ -43,14 +43,14 @@ def start(worker, size, quality, folder, temp, preffix, suffix):
 				img = Image.open(f"{images[x][0]}{images[x][2]}")
 				if not os.path.isdir(images[x][1]):
 					os.makedirs(images[x][1])
-				if not ((img.size[0] == 150 and img.size[1] <= 150) or (img.size[1] == 150 and img.size[0] <= 150)):
+				if (((img.size[0] > size or img.size[1] > size) and downscale) or ((img.size[0] < size and img.size[1] < size) and upscale)):
 					img.resize(get_pos(img.size, size), resample = Image.BICUBIC).save(f"{folder}{images[x][1]}{preffix}{images[x][3]}{suffix}{images[x][4]}", quality=quality, optimize=True)
-				else:
+				elif copy_ud:
 					img.save(f"{folder}{images[x][1]}{preffix}{images[x][3]}{suffix}{images[x][4]}", quality=quality, optimize=True)
 				img = None
 				os.system("cls")
 			except Exception as E:
-				d.write("\n" + re.sub(regex, subst, f'{datetime.now().strftime("%d.%m.%Y %H:%M:%S")} [Error] > {images[x][0]}{images[x][2]} > {E}'))
+				d.write("\n" + re.sub(regex, subst, f'{datetime.now().strftime("%d.%m.%Y %H:%M:%S")} [Error] > "{images[x][0]}{images[x][2]}" > {E}'))
 	except Exception as E:
 		d = open(f"{temp}/core{worker}.log", "a")
 		d.write(f"\n{datetime.now()} [Error] > {curr} > {E}")
