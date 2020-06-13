@@ -1,4 +1,4 @@
-#image_thumbler	
+# image_thumbler	
 
 - dependents
 	- python 3.x
