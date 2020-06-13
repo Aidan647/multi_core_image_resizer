@@ -3,6 +3,7 @@
 	- pip => requirements.txt
 
 - run
+	- copy img.py and core.py in working directory
 	- edit setting in img.py
 	- run img.py
 
