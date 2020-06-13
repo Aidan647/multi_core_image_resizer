@@ -1,5 +1,3 @@
-#image_thumbler
-
 - dependents
 	- python 3.x
 	- pip => requirements.txt
