@@ -37,7 +37,9 @@ def start(worker, size, quality, folder, temp, preffix, suffix, upscale, downsca
 	d = open(f"{temp}/core{worker}.log", "a")
 	try:
 		images = get_data(worker, temp)
-		for x in trange(len(images), leave=True, dynamic_ncols=True, ascii=True):#, bar_format= "{l_bar}{bar}|{n_fmt}/{total_fmt}"
+		bar = trange(len(images), leave=True, dynamic_ncols=True, ascii=True)#, bar_format= "{l_bar}{bar}|{n_fmt}/{total_fmt}"
+		terminalsize = 100**10
+		for x in bar:
 			if os.path.isfile("./stop.all"):
 				break
 			try:
@@ -53,12 +55,16 @@ def start(worker, size, quality, folder, temp, preffix, suffix, upscale, downsca
 				fa = open(f"{temp}/core{worker}.progress", "w")
 				fa.write(str(x))
 				fa.close()
-				if x % 10 == 0:
+				if os.get_terminal_size()[0] < terminalsize or bar.ncols+1 > os.get_terminal_size()[0]:
+					terminalsize = os.get_terminal_size()[0]
+					bar.refresh()
 					os.system("cls")
 					if (cores == 1):
 						print("Starting..")
 						print("Appling...")
 						print("Ctrl+C to stop")
+				elif os.get_terminal_size()[0] != terminalsize:
+					terminalsize = os.get_terminal_size()[0]
 			except Exception as E:
 				d.write("\n" + re.sub(regex, subst, f'{datetime.now().strftime("%d.%m.%Y %H:%M:%S")} [Error] > "{images[x][0]}{images[x][2]}" > {E}'))
 	except Exception as E:
