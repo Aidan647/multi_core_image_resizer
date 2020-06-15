@@ -29,6 +29,22 @@
 	minimized      ->  Start window minimized has priority over maximized
 	maximized      ->  Start window maximized
 	priority_class ->  "LOW" | "BELOWNORMAL" | "NORMAL" | "ABOVENORMAL" | "HIGH" | "REALTIME"
+	
+	
+# perfomance
+ram usage 10-30MB per core  
+16.5GB of data: 28000 png Images at 1280x720 to 200x112  
+  
+i7-4770 (8 threads) with background cpu ~10-20%  
+| Cores |  Time |  it/s |
+|:-----:|:-----:|:-----:|
+|   1   | 38:30 | 12.12 |
+|   2   | 20:25 | 22.85 |
+|   4   | 11:09 | 41.79 |
+|   8   | 08:26 | 55.23 |
+|   16  | 08:23 | 55.56 |
+	
+	
 
 
 
