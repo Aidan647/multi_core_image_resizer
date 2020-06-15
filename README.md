@@ -33,7 +33,7 @@
 	
 # perfomance
 ram usage 10-30MB per core  
-16.5GB of data: 28000 png Images at 1280x720 to 200x112  
+16.5GB of data: 28000 png Images (1280x720) to size = 200 (200x112) 
   
 i7-4770 (8 threads) with background cpu ~10-20%  
 | Cores |  Time |  it/s |
