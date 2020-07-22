@@ -1,5 +1,5 @@
 - dependents
-	- python 3.x
+	- python 3.x x64
 	- pip => requirements.txt
 
 - run
