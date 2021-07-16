@@ -9,6 +9,8 @@ from time import sleep
 from tempfile import TemporaryDirectory
 from datetime import datetime
 import re
+import sys
+EXT = sys.argv[1]
 
 regex = r".(?<![\x00-\x7F])"
 subst = "?"
@@ -44,6 +46,7 @@ def start(worker, size, quality, folder, temp, preffix, suffix, upscale, downsca
 				break
 			try:
 				curr = images[x][1]
+				if(EXT):images[x][4] = EXT
 				img = Image.open(f"{folder}{images[x][0]}{images[x][2]}")
 				if not os.path.isdir(folder + images[x][1]):
 					os.makedirs(folder + images[x][1])
