@@ -5,8 +5,7 @@ size = 200       #rect size to fit image in
 upscale = True   #upscale image IF smaller than [size]
 downscale = True #downscale image IF bigger than [size]
 copy_ud = True   #copy IF image are NOT downscaled and/or upscaled
-
-
+make_rect = False #Do every image rect
 
 path = "./VoiceSquad/"      #catalog with you images
 path_out = "./out/" #save path
@@ -30,6 +29,9 @@ priority_class = "" # "LOW" | "BELOWNORMAL" | "NORMAL" | "ABOVENORMAL" | "HIGH" 
 # Other
 TDprefix = "img_tmp_" # Temporary directory prefix
 # ---------------------------------
+
+
+
 
 
 
@@ -112,11 +114,12 @@ try:
 				shutil.copyfile(f"{os.path.dirname(os.path.abspath(__file__))}/core.py", f"{TD.name}/core{i}.py")
 				files.append(f"{TD.name}/core{i}.data")
 				f = open(f"{TD.name}/core{i}.py", "a")
-				f.write(f"\nstart(int({i}), int({size}), int({quality}),r'{os.path.dirname(os.path.abspath(__file__))}',r'{TD.name}',r'{prefix}',r'{suffix}',{upscale},{downscale},{copy_ud},{cores})")
+				f.write(f"\nstart(int({i}), int({size}), int({quality}),r'{os.path.dirname(os.path.abspath(__file__))}',r'{TD.name}',r'{prefix}',r'{suffix}',{upscale},{downscale},{copy_ud},{cores},{make_rect},r'{out_ext}')")
 				f.close()
 				PC = ""
 				MIN = ""
 				MAX = ""
+				EXT = ""
 				if priority_class != "": PC = f"/{priority_class}"
 				if minimized: MIN = "/MIN"
 				if maximized: MAX = "/MAX"
@@ -126,7 +129,7 @@ try:
 				tqdm_p.refresh()
 		else:
 			import core
-			core.start(0, size, quality,"./",TD.name,prefix,suffix,upscale,downscale,copy_ud,cores)
+			core.start(0, size, quality,"./",TD.name,prefix,suffix,upscale,downscale,copy_ud,cores,make_rect,out_ext)
 		done = False
 		terminalsize = 100**10
 		while done == False:
