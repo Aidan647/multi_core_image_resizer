@@ -12,6 +12,7 @@ path = "./VoiceSquad/"      #catalog with you images
 path_out = "./out/" #save path
 overwrite = True   #overwrite if image exist in [path_out]
 file_extensions = [".png", ".jpg", ".jpeg"] # tested only on ".png", ".jpg", ".jpeg"
+out_ext = '.png'
 
 prefix = "" #prefix for output filename
 suffix = "" #suffix for output filename
@@ -120,7 +121,8 @@ try:
 				if priority_class != "": PC = f"/{priority_class}"
 				if minimized: MIN = "/MIN"
 				if maximized: MAX = "/MAX"
-				os.system(f'start "core {i}" {PC} {MAX} {MIN} cmd /C "cd /d {TD.name} & py core{i}.py')
+				if out_ext: EXT = out_ext
+				os.system(f'start "core {i}" {PC} {MAX} {MIN} cmd /C "cd /d {TD.name} & py core{i}.py {EXT}')
 				progress = get_progress(TD.name,cores,cors)
 				tqdm_p.n = progress
 				tqdm_p.refresh()
