@@ -13,11 +13,12 @@
 	upscale   -> upscale image IF smaller than [size]
 	downscale -> downscale image IF bigger than [size]
 	copy_ud   -> copy IF image are NOT downscaled and/or upscaled
-
+	
 	path      -> catalog with you images
 	path_out  -> save path
 	overwrite -> overwrite if image exist in [path_out]
 	file_extensions = [".png", ".jpg", ".jpeg"] -> tested only on ".png", ".jpg", ".jpeg"
+	out_ext = '.png' extention for save. can be empry
 
 	prefix -> prefix for output filename
 	suffix -> suffix for output filename
